@@ -1,0 +1,105 @@
+@import "../sass/components/Header.scss";
+@import "../sass/components/GenericCard.scss";
+@import "../sass/components/NotFound.scss";
+@import "../sass/components//Loader.scss";
+@import "../sass/pages/SearchPage.scss";
+@import "../sass/pages/DetailsPage.scss";
+
+@import "./fonts/fonts.scss";
+@import "../sass/fonts/icons.scss";
+@import "./variables/Colors.scss";
+
+body {
+	font-family: "Nunito-Sans";
+	background-color: var(--primary-bg);
+}
+.generic-search {
+	position: relative;
+	.generic-search__input {
+		width: 500px;
+		height: 50px;
+		border-radius: 5px;
+		padding: 0 55px;
+		border: none;
+		box-shadow: 1px 1px 6px var(--box-shadow);
+		outline: none;
+		background-color: var(--secondary-bg);
+		color: var(--text-color);
+
+		&::placeholder {
+			color: var(--gray-text);
+			font-size: 13px;
+		}
+	}
+
+	.generic-search__btn {
+		position: absolute;
+		top: 26%;
+		background-color: transparent;
+		border: none;
+		outline: 0;
+		left: 14px;
+		.icon-search {
+			&::before {
+				font-size: 14px;
+				color: var(--gray-text);
+			}
+		}
+	}
+	.generic-search__reset {
+		&.icon-close {
+			&::before {
+				font-size: 14px;
+				color: var(--gray-text);
+			}
+		}
+		outline: 0;
+		box-shadow: unset;
+		border: 0;
+		background-color: transparent;
+		position: absolute;
+		right: 5px;
+		top: 15px;
+		@media (max-width: 767px) {
+			right: 15px;
+		}
+	}
+}
+
+.generic-btn {
+	border-color: var(--secondary-bg);
+	background-color: var(--secondary-bg);
+	color: var(--text-color);
+	padding: 13px;
+	border: none;
+	box-shadow: 1px 1px 6px var(--box-shadow);
+	outline: none;
+}
+.generic-img-wrapper {
+	position: relative;
+	.generic-img-wrapper__bluring-bg {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		&:before {
+			display: block;
+			content: "";
+			width: 100%;
+			padding-top: (3 / 5) * 100%;
+		}
+		filter: blur(1px);
+	}
+	.generic-img-wrapper__img {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+		overflow: hidden;
+		max-width: 100%;
+		height: 100%;
+	}
+}
