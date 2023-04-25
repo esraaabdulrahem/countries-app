@@ -42,7 +42,7 @@
               </li> 
             </ul>
           </div> -->
-          <div class="d-flex">
+          <!-- <div class="d-flex">
             <select
               class="generic-btn"
               v-model="key"
@@ -58,7 +58,15 @@
               v-show="key != ''"
               @click="resetFilteration()"
             ></button>
-          </div>
+          </div> -->
+          <Multiselect
+            v-model="countryValue"
+            @select="filterByRegion(countryValue)"
+            @clear="resetFilteration()"
+            placeholder="Filter by Region"
+            mode="single"
+            :options="options"
+          />
         </div>
       </div>
 
@@ -82,8 +90,8 @@
             ></generic-card>
           </div>
         </div>
+        <loader v-if="isLoading"></loader>
       </div>
-      <loader v-if="isLoading"></loader>
       <not-found v-if="!isSearchFound"></not-found>
     </div>
   </div>
@@ -94,20 +102,24 @@ import GenericCard from "@/components/GenericCard.vue";
 import axios from "axios";
 import NotFound from "@/components/NotFound.vue";
 import Loader from "@/components/Loader.vue";
+import Multiselect from "@vueform/multiselect";
+import "@vueform/multiselect/themes/default.css";
 
 export default {
   components: {
     GenericCard,
     NotFound,
     Loader,
+    Multiselect,
   },
   data() {
     return {
-      key: "",
+      countryValue: "",
+      options: ["Americas", "Africa", "Oceania", "Europe", "Asia", "Antarctic"],
       allCountries: [],
       searchWord: "",
       isSearchFound: true,
-      isLoading: false,
+      isLoading: true,
       uniqueFilterList: [],
     };
   },
@@ -141,12 +153,12 @@ export default {
         this.getAllCountries();
       }
     },
-    filterByRegion(event) {
+    filterByRegion(valueSelected) {
       // console.log(event.target.value)
 
       this.isLoading = true;
       axios
-        .get(`https://restcountries.com/v3.1/region/${event.target.value}`)
+        .get(`https://restcountries.com/v3.1/region/${valueSelected}`)
         .then((res) => {
           console.log(res, "filterByRegion");
           if (res.status == 200) {

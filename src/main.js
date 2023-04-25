@@ -5,6 +5,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import "../src/assets/sass/main.scss";
 import router from './router/index';
+
+
 const app = createApp(App);
 
 app.use(router)
