@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import BluredImgContainer from "./BluredImgContainer.vue";
+import BluredImgContainer from "../components/BluredImgContainer.vue";
 import axios from "axios";
 
 export default {

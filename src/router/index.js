@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import GenericDetails from "../components/GenericDetails.vue";
+import GenericDetails from "../views/GenericDetails.vue";
 import SearchPage from "../views/SearchPage.vue";
 
 const routes = [
