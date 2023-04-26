@@ -92,7 +92,10 @@
         </div>
         <loader v-if="isLoading"></loader>
       </div>
-      <not-found v-if="!isSearchFound"></not-found>
+      <div class="row">
+        <loader v-if="isLoading && !isSearchFound"></loader>
+        <not-found v-if="!isSearchFound"></not-found>
+      </div>
     </div>
   </div>
 </template>
@@ -134,7 +137,6 @@ export default {
         axios
           .get(`https://restcountries.com/v3.1/name/${searchWord}`)
           .then((Response) => {
-            // console.log(Response, "feom search");
             if (Response.status == 200) {
               this.allCountries = Response.data;
               this.isSearchFound = true;
@@ -142,7 +144,6 @@ export default {
             }
           })
           .catch(() => {
-            // console.log(error.status, "error");
             this.allCountries = [];
             this.isSearchFound = false;
             this.isLoading = false;
@@ -154,16 +155,13 @@ export default {
       }
     },
     filterByRegion(valueSelected) {
-      // console.log(event.target.value)
 
       this.isLoading = true;
       axios
         .get(`https://restcountries.com/v3.1/region/${valueSelected}`)
         .then((res) => {
-          console.log(res, "filterByRegion");
           if (res.status == 200) {
             this.allCountries = res.data;
-            // console.log(this.allCountries, "allcoun");
             this.isSearchFound = true;
             this.isLoading = false;
           }
@@ -173,7 +171,6 @@ export default {
       this.isLoading = true;
       this.searchWord = "";
       axios.get("https://restcountries.com/v3.1/all").then((res) => {
-        console.log(res);
         if (res.status == 200) {
           this.allCountries = res.data;
           this.isSearchFound = true;
@@ -184,7 +181,6 @@ export default {
               res.data.findIndex((item) => item.region === obj.region) === index
           );
 
-          console.log(this.uniqueFilterList, "uniqueuniqueunique");
         }
       });
     },

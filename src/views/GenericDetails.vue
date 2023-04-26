@@ -84,7 +84,7 @@
                         :key="index"
                       >
                         {{ currency.name }}
-                         <span class="details-page__content__bolded">/</span>
+                        <span class="details-page__content__bolded">/</span>
                       </span>
                     </li>
                     <li>
@@ -126,7 +126,7 @@
                         {{ border }}
                       </button>
                     </section>
-                    <p v-else>N/A</p>
+                    <p v-else class="details-page__content__bolded">N/A</p>
                   </div>
                 </div>
               </div>
@@ -153,24 +153,16 @@ export default {
       countryName: this.$route.params.name,
     };
   },
-  methods: {
-    // getByName(countryName) {
-    // },
-  },
   created() {
-    console.log(this.$route.params.name, "name");
     this.countryName = this.$route.params.name;
-    // this.getByName(this.$route.params.name);
     axios
       .get(
         `https://restcountries.com/v3.1/name/${this.$route.params.name}?fullText=true`
       )
       .then((res) => {
-        console.log(res, "countreee");
         if (res.status == 200) {
           this.countryDetails = res.data[0];
           this.image = this.countryDetails.flags?.png;
-          console.log(this.countryDetails, "countries");
         }
       });
   },

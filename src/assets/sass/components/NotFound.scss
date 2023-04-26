@@ -33,8 +33,9 @@
 }
 @media (max-width: 767px) {
 	.generic-not-found {
+		margin: 0;
 		.generic-not-found__img {
-			width: 360px;
+			width: 350px;
 		}
 		.generic-not-found__title {
 			bottom: 70px;
