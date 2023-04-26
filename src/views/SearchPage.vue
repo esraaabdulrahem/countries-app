@@ -95,7 +95,7 @@
         <not-found v-if="!isSearchFound"></not-found>
       </div>
     </div>
-    <loader v-if="isLoading" :isLoading="isLoading"></loader>
+    <loader v-if="isLoading"></loader>
   </div>
 </template>
 
@@ -130,8 +130,14 @@ export default {
       this.key = "";
       this.getAllCountries();
     },
+    stopScrolling() {
+      if (this.isLoading) {
+        document.body.classList.add("no-scroll");
+      }
+    },
     search(searchWord) {
       this.isLoading = true;
+      this.stopScrolling();
       if (searchWord) {
         axios
           .get(`https://restcountries.com/v3.1/name/${searchWord}`)
@@ -140,6 +146,7 @@ export default {
               this.allCountries = Response.data;
               this.isSearchFound = true;
               this.isLoading = false;
+              document.body.classList.remove("no-scroll");
             }
           })
           .catch(() => {
@@ -149,12 +156,14 @@ export default {
           });
       } else {
         this.isLoading = true;
+        document.body.classList.add("no-scroll");
         this.searchWord = "";
         this.getAllCountries();
       }
     },
     filterByRegion(valueSelected) {
       this.isLoading = true;
+      this.stopScrolling();
       axios
         .get(`https://restcountries.com/v3.1/region/${valueSelected}`)
         .then((res) => {
@@ -162,17 +171,20 @@ export default {
             this.allCountries = res.data;
             this.isSearchFound = true;
             this.isLoading = false;
+            document.body.classList.remove("no-scroll");
           }
         });
     },
     getAllCountries() {
       this.isLoading = true;
+      this.stopScrolling();
       this.searchWord = "";
       axios.get("https://restcountries.com/v3.1/all").then((res) => {
         if (res.status == 200) {
           this.allCountries = res.data;
           this.isSearchFound = true;
           this.isLoading = false;
+          document.body.classList.remove("no-scroll");
 
           this.uniqueFilterList = res.data.filter(
             (obj, index) =>
@@ -184,9 +196,6 @@ export default {
   },
   mounted() {
     this.getAllCountries();
-  },
-  deactivated() {
-    alert("hi");
   },
 };
 </script>

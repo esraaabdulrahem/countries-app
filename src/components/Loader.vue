@@ -7,17 +7,17 @@
 <script>
 export default {
   props: ["isLoading"],
-  methods: {
-    stopScrolling() {
-      if (this.isLoading) {
-        document.body.classList.add("no-scroll");
-      } else {
-        document.body.classList.remove("no-scroll");
-      }
-    },
-  },
-  mounted() {
-    this.stopScrolling();
-  },
+  //   methods: {
+  //     stopScrolling() {
+  //       if (this.isLoading) {
+  //         document.body.classList.add("no-scroll");
+  //       } else {
+  //         document.body.classList.remove("no-scroll");
+  //       }
+  //     },
+  //   },
+  //   mounted() {
+  //     this.stopScrolling();
+  //   },
 };
 </script>
