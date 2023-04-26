@@ -90,13 +90,12 @@
             ></generic-card>
           </div>
         </div>
-        <loader v-if="isLoading"></loader>
       </div>
       <div class="row">
-        <loader v-if="isLoading && !isSearchFound"></loader>
         <not-found v-if="!isSearchFound"></not-found>
       </div>
     </div>
+    <loader v-if="isLoading" :isLoading="isLoading"></loader>
   </div>
 </template>
 
@@ -155,7 +154,6 @@ export default {
       }
     },
     filterByRegion(valueSelected) {
-
       this.isLoading = true;
       axios
         .get(`https://restcountries.com/v3.1/region/${valueSelected}`)
@@ -180,7 +178,6 @@ export default {
             (obj, index) =>
               res.data.findIndex((item) => item.region === obj.region) === index
           );
-
         }
       });
     },
